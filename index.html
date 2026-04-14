@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Opening in Obsidian…</title>
+<style>
+  body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #1e1e2e; color: #cdd6f4; }
+  .box { text-align: center; }
+  a { color: #89b4fa; }
+</style>
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var vault = params.get('vault') || 'a5-vault';
+  var file = params.get('file');
+  if (!file) {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.box').innerHTML = '<p>Missing <code>file</code> parameter.</p>';
+    });
+    return;
+  }
+  var uri = 'obsidian://open?vault=' + encodeURIComponent(vault) + '&file=' + encodeURIComponent(file);
+  window.location.href = uri;
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.box').innerHTML =
+      '<p>Opening in Obsidian…</p>' +
+      '<p style="margin-top:1em;font-size:0.85em;">Not working? <a href="' + uri + '">Click here</a></p>';
+  });
+})();
+</script>
+</head>
+<body>
+<div class="box">
+  <p>Redirecting…</p>
+</div>
+</body>
+</html>
